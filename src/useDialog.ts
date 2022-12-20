@@ -1,6 +1,6 @@
 import { useRef, useCallback } from 'react';
 
-export const useModal = () => {
+export const useDialog = () => {
   const ref = useRef<HTMLDialogElement>(null);
 
   const showModal = useCallback(() => {
