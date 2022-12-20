@@ -1,36 +1,21 @@
-import { useRef } from 'react';
+import { Dialog } from '../src/Dialog';
+import { useModal } from '../src/useModal';
 
 export default function Home() {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  const show = () => {
-    dialogRef?.current?.show();
-  };
-  const showModal = () => {
-    dialogRef?.current?.showModal();
-  };
-
-  const closeDialog = () => {
-    dialogRef?.current?.close();
-  };
+  const { ref, showModal, closeModal } = useModal();
 
   return (
     <div>
       <h1>Sample dialog element</h1>
-      <button onClick={show}>show</button>
       <button onClick={showModal}>showModal</button>
 
-      <dialog
-        ref={dialogRef}
-        className='border backdrop:bg-black/80 relative'
-        onClick={() => console.log('aaa')}
-      >
-        <div className='z-10 w-40 h-40'>
-          <h2>Dialog title</h2>
-          <p>Dialog content</p>
-          <button onClick={closeDialog}>close</button>
-        </div>
-      </dialog>
+      <Dialog ref={ref} onClose={closeModal}>
+        <h2 className='text-lg'>Dialog title</h2>
+        <p>Dialog content. Dialog content. Dialog content.</p>
+        <button className='absolute bottom-2 right-2' onClick={closeModal}>
+          close
+        </button>
+      </Dialog>
     </div>
   );
 }
